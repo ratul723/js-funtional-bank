@@ -1,11 +1,11 @@
-function getdepositeInput() {
-    const depositeInput = document.getElementById('Deposit-amount')
-    const despositeAmountText = depositeInput.value
-    const despositeAmount = parseFloat(despositeAmountText)
+function getInputValue(inputId) {
+    const inputField = document.getElementById(inputId)
+    const inputAmountText = inputField.value
+    const amountValue = parseFloat(inputAmountText)
     //clear input field
-    depositeInput.value = ''
+    inputField.value = ''
 
-    return despositeAmount;
+    return amountValue;
 
 }
 
@@ -15,6 +15,7 @@ document.getElementById('diposit-button').addEventListener('click', function () 
     /*const depositeInput = document.getElementById('Deposit-amount')
     const despositeAmountText = depositeInput.value
     const despositeAmount = parseFloat(despositeAmountText)*/
+    const despositeAmount = getInputValue('Deposit-amount')
 
     // get current diposite 
     const depostieTotal = document.getElementById('deposite-total')
@@ -36,9 +37,10 @@ document.getElementById('diposit-button').addEventListener('click', function () 
 
 //get withdraw total
 document.getElementById('Withdraw-button').addEventListener('click', function () {
-    const withdrawInput = document.getElementById('withdraw-amount')
+    /*const withdrawInput = document.getElementById('withdraw-amount')
     const withdrawAmountText = withdrawInput.value
-    const withdrawAmount = parseFloat(withdrawAmountText)
+    const withdrawAmount = parseFloat(withdrawAmountText)*/
+    const withdrawAmount = getInputValue('withdraw-amount')
     // update withdraw total
 
     const withdrawTotal = document.getElementById('withdraw-total')
