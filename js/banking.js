@@ -14,11 +14,19 @@ function updateTotalField(totalFieldId, amount) {
     const previousAmount = parseFloat(totalText)
     totalElement.innerText = previousAmount + amount
 }
-
-function updateBalance(balanceAmount, isAdd) {
+function getCurrentBalance() {
     const balanceTotal = document.getElementById('balance-total')
     const balanceTotalText = balanceTotal.innerText
     const previousBalanceTotal = parseFloat(balanceTotalText)
+    return previousBalanceTotal;
+}
+
+function updateBalance(balanceAmount, isAdd) {
+    debugger;
+    const balanceTotal = document.getElementById('balance-total')
+    /*const balanceTotalText = balanceTotal.innerText
+    const previousBalanceTotal = parseFloat(balanceTotalText)*/
+    const previousBalanceTotal = getCurrentBalance();
 
     if (isAdd == true) {
         balanceTotal.innerText = previousBalanceTotal + balanceAmount
@@ -49,13 +57,11 @@ document.getElementById('diposit-button').addEventListener('click', function () 
 
 
     const despositeAmount = getInputValue('Deposit-amount')
-    updateTotalField('deposite-total', despositeAmount)
-    updateBalance(despositeAmount, true)
 
-
-
-
-
+    if (despositeAmount > 0) {
+        updateTotalField('deposite-total', despositeAmount)
+        updateBalance(despositeAmount, true)
+    }
 
 })
 
@@ -77,7 +83,13 @@ document.getElementById('Withdraw-button').addEventListener('click', function ()
     const previousBalanceTotal = parseFloat(balanceTotalText)
     balanceTotal.innerText = previousBalanceTotal - withdrawAmount*/
     const withdrawAmount = getInputValue('withdraw-amount')
-    updateTotalField('withdraw-total', withdrawAmount)
-    updateBalance(withdrawAmount, false)
+    const currentBalance = getCurrentBalance()
+    if (withdrawAmount > 0 && withdrawAmount < currentBalance) {
+        updateTotalField('withdraw-total', withdrawAmount)
+        updateBalance(withdrawAmount, false)
+    }
+    if (withdrawAmount > currentBalance) {
+        alert("You can not withdraw more than you have")
+    }
 
 })
